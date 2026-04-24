@@ -112,6 +112,22 @@
         </div>
         <!-- Navbar & Hero End -->
 
+        <!-- Pendo Identify Form Start -->
+        <div class="container-fluid bg-light py-5 px-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h3 class="mb-3">Pendo Identify Test</h3>
+                    <p class="mb-3">Enter a visitor ID and submit to call <code>pendo.identify(visitorId)</code>.</p>
+                    <form id="pendo-identify-form" class="d-flex gap-2 align-items-start flex-wrap">
+                        <input type="text" id="pendo-visitor-id" class="form-control" placeholder="visitor id" required style="max-width: 320px;">
+                        <button type="submit" class="btn btn-primary">Identify</button>
+                    </form>
+                    <div id="pendo-identify-result" class="mt-3 small text-muted"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Pendo Identify Form End -->
+
 
         <!-- About Start -->
         <div class="container-fluid overflow-hidden py-5"  style="margin-top: 6rem;">
@@ -774,6 +790,30 @@
                         signup_source_page: "home",
                         signup_method: "navbar_button"
                     });
+                }
+            });
+        }
+
+        // Identify visitor from form submission
+        var identifyForm = document.getElementById("pendo-identify-form");
+        if (identifyForm) {
+            identifyForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var visitorId = document.getElementById("pendo-visitor-id").value.trim();
+                var result = document.getElementById("pendo-identify-result");
+                if (!visitorId) { return; }
+                if (typeof pendo !== "undefined") {
+                    try {
+                        pendo.identify(visitorId);
+                        result.textContent = 'Called pendo.identify("' + visitorId + '")';
+                        result.className = "mt-3 small text-success";
+                    } catch (err) {
+                        result.textContent = "Error: " + err.message;
+                        result.className = "mt-3 small text-danger";
+                    }
+                } else {
+                    result.textContent = "pendo is not defined on this page";
+                    result.className = "mt-3 small text-danger";
                 }
             });
         }
