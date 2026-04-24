@@ -115,7 +115,7 @@
                     <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
                         <h2 class="display-5 mb-2">Our Contact Form</h2>
                         <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a class="text-primary fw-bold" href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                        <form>
+                        <form id="contactForm">
                             <div class="row g-3">
                                 <div class="col-lg-12 col-xl-6">
                                     <div class="form-floating">
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3">Send Message</button>
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
                                 </div>
                             </div>
                         </form>
@@ -310,6 +310,43 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- Pendo Track Events -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Track contact form submission
+        var contactForm = document.getElementById("contactForm");
+        if (contactForm) {
+            contactForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var messageEl = document.getElementById("message");
+                if (typeof pendo !== "undefined") {
+                    pendo.track("contact_form_submitted", {
+                        name: document.getElementById("name").value,
+                        email: document.getElementById("email").value,
+                        phone: document.getElementById("phone").value,
+                        project: document.getElementById("project").value,
+                        subject: document.getElementById("subject").value,
+                        message_length: messageEl ? messageEl.value.length : 0
+                    });
+                }
+            });
+        }
+
+        // Track Sign Up button click
+        var signUpBtn = document.querySelector('a.btn.btn-primary.rounded-pill[href="#"]');
+        if (signUpBtn && signUpBtn.textContent.trim() === "Sign Up") {
+            signUpBtn.addEventListener("click", function () {
+                if (typeof pendo !== "undefined") {
+                    pendo.track("user_sign_up", {
+                        signup_source_page: "contact",
+                        signup_method: "navbar_button"
+                    });
+                }
+            });
+        }
+    });
+    </script>
     </body>
 
 </html>
