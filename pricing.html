@@ -132,7 +132,7 @@
                                 <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
                                 <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
                                 <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
-                                <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
+                                <button class="btn btn-light rounded-pill py-2 px-5 pricing-get-started" type="button" data-plan-name="Basic" data-plan-price="$0" data-billing-period="monthly">Get Started</button>
                             </div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
                                 <div class="d-flex justify-content-center">
                                     <strong class="align-self-start">$</strong>
                                     <p class="mb-0"><span class="display-5">23</span>/mo</p>
-                                </div>                        
+                                </div>
                             </div>
                             <div class="text-start p-5">
                                 <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
@@ -157,7 +157,7 @@
                                 <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
                                 <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
                                 <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
-                                <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
+                                <button class="btn btn-light rounded-pill py-2 px-5 pricing-get-started" type="button" data-plan-name="Standard" data-plan-price="$23" data-billing-period="monthly">Get Started</button>
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                                 <div class="d-flex justify-content-center">
                                     <strong class="align-self-start">$</strong>
                                     <p class="mb-0"><span class="display-5">49</span>/mo</p>
-                                </div>                        
+                                </div>
                             </div>
                             <div class="text-start p-5">
                                 <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
@@ -181,7 +181,7 @@
                                 <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
                                 <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
                                 <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
-                                <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
+                                <button class="btn btn-light rounded-pill py-2 px-5 pricing-get-started" type="button" data-plan-name="Premium" data-plan-price="$49" data-billing-period="monthly">Get Started</button>
                             </div>
                         </div>
                     </div>
@@ -444,6 +444,38 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- Pendo Track Events -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Track pricing plan selection
+        var pricingButtons = document.querySelectorAll(".pricing-get-started");
+        pricingButtons.forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                if (typeof pendo !== "undefined") {
+                    pendo.track("pricing_plan_selected", {
+                        plan_name: btn.getAttribute("data-plan-name"),
+                        plan_price: btn.getAttribute("data-plan-price"),
+                        billing_period: btn.getAttribute("data-billing-period")
+                    });
+                }
+            });
+        });
+
+        // Track Sign Up button click
+        var signUpBtn = document.querySelector('a.btn.btn-primary.rounded-pill[href="#"]');
+        if (signUpBtn && signUpBtn.textContent.trim() === "Sign Up") {
+            signUpBtn.addEventListener("click", function () {
+                if (typeof pendo !== "undefined") {
+                    pendo.track("user_sign_up", {
+                        signup_source_page: "pricing",
+                        signup_method: "navbar_button"
+                    });
+                }
+            });
+        }
+    });
+    </script>
     </body>
 
 </html>
