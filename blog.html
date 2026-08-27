@@ -289,6 +289,24 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- Pendo Track Events -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Track Sign Up button click
+        var signUpBtn = document.querySelector('a.btn.btn-primary.rounded-pill[href="#"]');
+        if (signUpBtn && signUpBtn.textContent.trim() === "Sign Up") {
+            signUpBtn.addEventListener("click", function () {
+                if (typeof pendo !== "undefined") {
+                    pendo.track("user_sign_up", {
+                        signup_source_page: "blog",
+                        signup_method: "navbar_button"
+                    });
+                }
+            });
+        }
+    });
+    </script>
     </body>
 
 </html>
