@@ -10,6 +10,26 @@
   ],
   "tools": [
     {
+      "name": "create_order",
+      "method": "POST",
+      "route": "/api/orders",
+      "access": "write",
+      "params": [
+        {
+          "name": "productId",
+          "in": "body",
+          "required": false,
+          "sample": "sample"
+        },
+        {
+          "name": "userId",
+          "in": "body",
+          "required": false,
+          "sample": "sample"
+        }
+      ]
+    },
+    {
       "name": "list_products",
       "method": "GET",
       "route": "/api/products",
