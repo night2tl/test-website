@@ -84,6 +84,34 @@
           "sample": "a b/c"
         }
       ]
+    },
+    {
+      "name": "get_user",
+      "method": "GET",
+      "route": "/api/users/:id",
+      "access": "read",
+      "params": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "sample": "a b/c"
+        }
+      ]
+    },
+    {
+      "name": "delete_order",
+      "method": "DELETE",
+      "route": "/api/orders/:id",
+      "access": "write",
+      "params": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "sample": "a b/c"
+        }
+      ]
     }
   ]
 }
