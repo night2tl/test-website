@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "authMode": "none",
+  "headers": [],
+  "tools": [
+    {
+      "name": "list_products",
+      "method": "GET",
+      "route": "/api/products",
+      "access": "read",
+      "params": [
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "sample": "sample"
+        }
+      ]
+    },
+    {
+      "name": "get_product",
+      "method": "GET",
+      "route": "/api/products/:id",
+      "access": "read",
+      "params": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "sample": "a b/c"
+        }
+      ]
+    },
+    {
+      "name": "search_products",
+      "method": "GET",
+      "route": "/api/search",
+      "access": "read",
+      "params": [
+        {
+          "name": "q",
+          "in": "query",
+          "required": true,
+          "sample": "sample"
+        }
+      ]
+    }
+  ]
+}
