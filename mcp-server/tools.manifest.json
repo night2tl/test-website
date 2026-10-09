@@ -44,6 +44,40 @@
           "sample": "sample"
         }
       ]
+    },
+    {
+      "name": "create_order",
+      "method": "POST",
+      "route": "/api/orders",
+      "access": "write",
+      "params": [
+        {
+          "name": "productId",
+          "in": "body",
+          "required": false,
+          "sample": "sample"
+        },
+        {
+          "name": "userId",
+          "in": "body",
+          "required": false,
+          "sample": "sample"
+        }
+      ]
+    },
+    {
+      "name": "get_order",
+      "method": "GET",
+      "route": "/api/orders/:id",
+      "access": "read",
+      "params": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "sample": "a b/c"
+        }
+      ]
     }
   ]
 }
